@@ -76,12 +76,8 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    alias png='ping 8.8.8.8'
-    alias pctl='pactl set-sink-volume 0 +20%'
-	alias rpc='cd ~/workspace/main/experimental/'
-	alias build='cd ~/workspace/main/build/experimental/shishir/rpc'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+  	alias rpc='cd ~/workspace/main/experimental/'
+	  alias build='cd ~/workspace/main/build/experimental/shishir/rpc'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -94,6 +90,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias png='ping 8.8.8.8'
 alias pctl='pactl --set-sink-volume 0 +10%'
+alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -118,3 +115,25 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# extract archives
+extract () {
+  if [ -f $1 ] ; then
+    case $1 in
+        *.tar.bz2)   tar xvjf $1    ;;
+        *.tar.gz)    tar xvzf $1    ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar x $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xvf $1     ;;
+        *.tbz2)      tar xvjf $1    ;;
+        *.tgz)       tar xvzf $1    ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)           echo "don't know how to extract '$1'..." ;;
+     esac
+  else
+    echo "'$1' is not a valid file!"
+  fi
+}
