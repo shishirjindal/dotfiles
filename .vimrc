@@ -11,6 +11,8 @@ autocmd BufNewFile *.{cc,proto,go,sh} call <SID>insert_copyright()
 " Switch Between tabs
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
+
+" Toggle folds
 nnoremap <space> :za<CR>
 
 " Pathogen to install plugins easily
@@ -49,3 +51,11 @@ imap <C-K> <c-o>:pyf /home/shishir/clang-format.py<CR>
 
 " NerdTree Plugin
 autocmd vimenter * NERDTree
+
+" CtrlP Plugin
+set runtimepath^=~/.vim/bundle/ctrlp
+
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': [],
+    \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+    \ }
